@@ -8,8 +8,8 @@
       "email": "c.xinle@gmail.com"
     }
   ],
-  "repository": "git://github.com/treelite/yaya",
-  "devDependencies": {
+  "dependencies": {
     "archer": "~0.1.0"
-  }
+  },
+  "repository": "git://github.com/treelite/yaya"
 }
