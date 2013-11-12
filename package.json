@@ -1,9 +1,15 @@
 {
-    "name": "yaya",
-    "description": "Spending Recorder",
-    "version": "0.0.1",
-    "maintainers": [
-        { "name": "treelite", "email" : "c.xinle@gmail.com" }
-    ],
-    "repository": "git://github.com/treelite/yaya",
+  "name": "yaya",
+  "description": "Spending Recorder",
+  "version": "0.0.1",
+  "maintainers": [
+    {
+      "name": "treelite",
+      "email": "c.xinle@gmail.com"
+    }
+  ],
+  "repository": "git://github.com/treelite/yaya",
+  "devDependencies": {
+    "archer": "~0.1.0"
+  }
 }

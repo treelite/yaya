@@ -1,0 +1,43 @@
+@import 'archer'
+
+normalize()
+
+body
+    padding: 0 px_to_rem(10px)
+
+h1
+    text-align: center
+    color: #333
+
+header 
+    display: flex
+    padding: 0 px_to_rem(20px) px_to_rem(20px)
+    margin-bottom: px_to_rem(20px)
+
+    border-bottom: 1px solid #CCC
+
+    input,
+    #submit
+        padding: px_to_rem(3px) px_to_rem(8px)
+        border: 2px solid #CCC
+        border-radius: 5px
+        line-height: 2rem
+
+    input
+        flex: 1
+        outline: none
+
+    input:hover
+        box-shadow: -1px 1px 5px #CCC inset
+
+    #submit
+        width: px_to_rem(80px)
+        margin-left: px_to_rem(5px)
+
+        border-color: #0060BF
+        background: #0060BF
+
+        color: #FFF
+        text-align: center
+        font-weight: bold
+        text-decoration: none

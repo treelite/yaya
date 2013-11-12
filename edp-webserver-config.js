@@ -1,3 +1,5 @@
+var archer = require('archer');
+
 exports.port = 8848;
 exports.directoryIndexes = true;
 exports.documentRoot = __dirname;
@@ -26,7 +28,9 @@ exports.getLocations = function () {
         { 
             location: /\.css($|\?)/, 
             handler: [
-                autocss()
+                autocss({
+                    'stylus': archer()
+                })
             ]
         },
         { 
@@ -40,7 +44,7 @@ exports.getLocations = function () {
             location: /\.styl($|\?)/, 
             handler: [
                 file(),
-                stylus()
+                stylus(archer())
             ]
         },
         {
