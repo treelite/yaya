@@ -12,7 +12,7 @@ function getModuleIdFromUrl(url) {
     var name = path.basename(url);
     name = name.charAt(0).toUpperCase() + name.substring(1);
 
-    return path.dirname(url) + '/' + name + 'Action';
+    return './service/' + path.dirname(url) + '/' + name;
 }
 
 function extend(target, source) {
@@ -34,7 +34,7 @@ function getQuery(request) {
     var res = querystring.parse(query);
 
     if (request.method == 'POST') {
-        var data = request.bodyBuffer.join('');
+        var data = querystring.parse(request.bodyBuffer.toString());
         res = extend(res, data);
     }
 
@@ -44,7 +44,7 @@ function getQuery(request) {
 function finish(context) {
     return function (data) {
         context.status = data.status || 200;
-        context.header['Content-Type'] = data['Content-Type'] || 'text/html';
+        context.header['Content-Type'] = data.contentType || 'text/html';
         context.content = data.content || data;
         context.start();
     };

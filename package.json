@@ -1,15 +1,23 @@
 {
-  "name": "yaya",
-  "description": "Spending Recorder",
-  "version": "0.0.1",
-  "maintainers": [
-    {
-      "name": "treelite",
-      "email": "c.xinle@gmail.com"
-    }
-  ],
-  "dependencies": {
-    "archer": "~0.1.0"
-  },
-  "repository": "git://github.com/treelite/yaya"
+    "name": "yaya",
+    "description": "Spending Recorder",
+    "version": "0.0.1",
+    "maintainers": [
+        {
+            "name": "treelite",
+            "email": "c.xinle@gmail.com"
+        }
+    ],
+    "dependencies": {
+        "archer": "~0.1.0",
+        "saber-dom": "0.x",
+        "saber-ajax": "0.x",
+        "saber-promise": "0.x",
+        "saber-emitter": "0.x",
+        "saber-viewport": "0.x",
+        "saber-lang": "0.x",
+        "saber-run": "0.x",
+        "saber-string": "0.x"
+    },
+    "repository": "git://github.com/treelite/yaya"
 }
