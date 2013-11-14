@@ -5,6 +5,7 @@ Spending Recorder
 ## Usage
 
     $ cd yaya
+    $ npm install
     $ edp update
     $ edp ws start
 
