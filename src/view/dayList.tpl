@@ -1,5 +1,7 @@
 <!-- name:main -->
-<h3>日花费</h3>
+<p>
+    <select id="daySel"></select>
+</p>
 <div class="table"></div>
 
 <!-- name:tableHeader -->

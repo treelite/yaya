@@ -11,16 +11,25 @@ define(function (require) {
     var view;
     var dataList;
 
+    function bindEvents() {
+        view.on('query', function (queryInfo) {
+            dataList = record.query(queryInfo);
+            dataList.fetch(0, 10).then(function (res) {
+                view.refresh(res.data);
+            });
+        });
+    }
+
     return {
         enter: function (main) {
             view = new View(main);
-            dataList = record.query({
-                begin: '2013-11-13',
-                end: '2013-11-13'
-            });
+            view.render();
 
+            bindEvents();
+
+            dataList = record.query(view.getQuery());
             return dataList.fetch(0, 10).then(function (res) {
-                view.render(res.data);
+                view.refresh(res.data);
             });
         },
 

@@ -7,6 +7,7 @@ define(function (require) {
 
     var View = require('./view/MonthList');
     var record = require('./model/record');
+    var util = require('./common/util');
 
     var view;
     var dataList;
@@ -14,9 +15,13 @@ define(function (require) {
     return {
         enter: function (main) {
             view = new View(main);
+            
+            var end = new Date();
+            var begin = new Date();
+            begin.setDate(1);
             dataList = record.query({
-                begin: '2013-11-13',
-                end: '2013-11-13'
+                begin: util.stringifyDate(begin),
+                end: util.stringifyDate(end)
             });
 
             return dataList.fetch(0, 10).then(function (res) {

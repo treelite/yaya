@@ -11,10 +11,7 @@ h1
 
 header 
     display: flex
-    padding: 0 px_to_rem(20px) px_to_rem(20px)
     margin-bottom: px_to_rem(20px)
-
-    border-bottom: 1px solid #CCC
 
     input,
     #submit
@@ -41,3 +38,58 @@ header
         text-align: center
         font-weight: bold
         text-decoration: none
+
+.content
+    nav
+        border-bottom: 1px solid #CCC
+        padding: 0 px_to_rem(10px)
+
+        a
+            display: inline-block
+            margin-bottom: -1px
+            padding: 0 px_to_rem(10px)
+            height: px_to_rem(30px)
+            line-height: px_to_rem(30px)
+
+            color: #666
+            text-decoration: none
+
+            border: 1px solid transparent;
+            border-bottom: 0
+            border-radius: 5px 5px 0 0;
+
+        a.cur
+            border-color: #CCC
+            background: #FFF;
+            color: #000
+
+    .table
+        border: 1px solid #CCC
+        border-radius: 5px
+
+        table
+            width: 100%
+
+        td
+            border-bottom: 1px solid #CCC
+            border-right: 1px solid #CCC
+            padding: px_to_rem(5px)
+            color: #333
+
+        th
+            border-right: 1px solid #CCC
+            padding: px_to_rem(5px)
+            background: #e6f1f6
+
+        tr:nth-child(2) td
+            border-top: 1px solid #CCC
+
+        th:last-child,
+        td:last-child 
+            border-right: 0
+
+        tr:last-child td
+            border-bottom: 0
+
+        tr:hover td 
+            background: #FCFCE2
