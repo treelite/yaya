@@ -5,39 +5,37 @@
 
 define(function (require) {
 
-    var View = require('./view/DayList');
-    var record = require('./model/record');
+    var view = require('./view/day');
 
-    var view;
-    var dataList;
+    var model = require('./model/day');
+
+    var action = require('saber-firework').action('day');
 
     function bindEvents() {
-        view.on('query', function (queryInfo) {
-            dataList = record.query(queryInfo);
-            dataList.fetch(0, 10).then(function (res) {
-                view.refresh(res.data);
-            });
+        view.on('query', function (value) {
+            var queryInfo = {
+                    begin: value,
+                    end: value
+                };
+            model.setQueryInfo(queryInfo);
+            action.refresh();
         });
     }
 
-    return {
-        enter: function (main) {
-            view = new View(main);
-            view.render();
-
-            bindEvents();
-
-            dataList = record.query(view.getQuery());
-            return dataList.fetch(0, 10).then(function (res) {
-                view.refresh(res.data);
-            });
-        },
-
-        refresh: function () {
-            dataList.fetch(0, 10).then(function (res) {
-                view.refresh(res.data);
-            });
-        }
+    action.enter = function (main) {
+        return model.fetch().then(
+                function (res) {
+                    view.render(main, res.template, res.data);
+                    bindEvents();
+                }
+            );
     };
 
+    action.refresh = function () {
+        model.query().then(function (res) {
+            view.refresh(res.data);
+        });
+    };
+
+    return action;
 });

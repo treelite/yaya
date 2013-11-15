@@ -5,21 +5,21 @@
 
 define(function (require) {
 
-    var tpl = require('tpl!./monthList.tpl');
     var dom = require('saber-dom');
     var format = require('saber-string/format');
+    var View = require('saber-firework/View');
 
-    function View(main) {
-        this.main = main;
-    }
+    var view = new View('month');
 
-    View.prototype.render = function (data) {
-        this.main.innerHTML = tpl.main;
+    view.render = function (main, template, data) {
+        View.prototype.render.call(this, main, template);
+        this.main.innerHTML = template.main;
         this.refresh(data);
     };
 
-    View.prototype.refresh = function (data) {
+    view.refresh = function (data) {
         var ele = dom.query('.table', this.main);
+        var tpl = this.template;
 
         var html = ['<table>'];
         html.push(tpl.tableHeader);
@@ -31,5 +31,5 @@ define(function (require) {
         ele.innerHTML = html.join('');
     };
 
-    return View;
+    return view;
 });

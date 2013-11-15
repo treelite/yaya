@@ -5,35 +5,22 @@
 
 define(function (require) {
 
-    var View = require('./view/MonthList');
-    var record = require('./model/record');
-    var util = require('./common/util');
+    var view = require('./view/month');
+    var model = require('./model/month');
 
-    var view;
-    var dataList;
+    var action = require('saber-firework').action('month');
     
-    return {
-        enter: function (main) {
-            view = new View(main);
-            
-            var end = new Date();
-            var begin = new Date();
-            begin.setDate(1);
-            dataList = record.query({
-                begin: util.stringifyDate(begin),
-                end: util.stringifyDate(end)
-            });
-
-            return dataList.fetch(0, 10).then(function (res) {
-                view.render(res.data);
-            });
-        },
-
-        refresh: function () {
-            dataList.fetch(0, 10).then(function (res) {
-                view.refresh(res.data);
-            });
-        }
+    action.enter = function (main) {
+        return model.fetch().then(function (res) {
+            view.render(main, res.template, res.data);
+        });
     };
 
+    action.refresh = function () {
+        dataList.query().then(function (res) {
+            view.refresh(res.data);
+        });
+    };
+
+    return action;
 });

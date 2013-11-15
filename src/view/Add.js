@@ -5,8 +5,9 @@
 
 define(function (require) {
 
-    var Emitter = require('saber-emitter');
     var dom = require('saber-dom');
+    var View = require('saber-firework/View');
+    var view = new View('add');
     
     function submit(view) {
         var input = dom.query('input', view.main);
@@ -44,19 +45,15 @@ define(function (require) {
         );
     }
     
-    function View(main) {
-        Emitter.mixin(this);
-        this.main = main;
-    }
-
-    View.prototype.reset = function () {
+    view.reset = function () {
         var input = dom.query('input', this.main);
         input.value = '';
     };
 
-    View.prototype.render = function () {
+    view.render = function (main) {
+        View.prototype.render.call(this, main);
         bindEvents(this);
     };
     
-    return View;
+    return view;
 });

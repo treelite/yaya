@@ -5,6 +5,7 @@
 
 define(function (require) {
 
+    var View = require('saber-firework/View');
     var viewport = require('saber-viewport');
     var dom = require('saber-dom');
 
@@ -20,11 +21,11 @@ define(function (require) {
         }
     }
 
-    function View(main) {
-        this.main = main;
-    }
+    var view = new View('list');
 
-    View.prototype.render = function () {
+    view.render = function (main) {
+        View.prototype.render.call(this, main);
+
         var ele = dom.query('.viewport', this.main);
         viewport.init(ele);
 
@@ -32,7 +33,7 @@ define(function (require) {
         ele.addEventListener('click', navClickHandler, false);
     };
 
-    View.prototype.load = function (url) {
+    view.load = function (url) {
         var items = dom.queryAll('nav a', this.main);
         
         items = Array.prototype.slice.call(items);
@@ -47,5 +48,5 @@ define(function (require) {
         return viewport.load(url);
     };
 
-    return View;
+    return view;
 });

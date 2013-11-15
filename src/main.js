@@ -4,32 +4,24 @@
  */
 
 define(function (require) {
-    var dom = require('saber-dom');
-    var AddView = require('./view/Add');
-    var ListView = require('./view/List');
-    var record = require('./model/record');
-    var rounter = require('./common/router');
-
     var curAction;
-    var view = {};
+
+    var router = require('saber-router');
+    var model = require('./model/record');
+    var view = {
+            add: require('./view/add'),
+            list: require('./view/list'),
+        };
 
     function bindEvents() {
         view.add.on('submit', function (e) {
             var me = this;
             var data = e.data;
-            record.add(data).then(function () {
+            model.add(data).then(function () {
                 me.reset();
                 curAction.refresh();
             });
         });
-    }
-
-    function render() {
-        Object.keys(view).forEach(function (key) {
-            view[key].render();
-        });
-
-        bindEvents();
     }
 
     function loadAction(url, file) {
@@ -49,21 +41,21 @@ define(function (require) {
             '/month': loadAction('/month', 'month')
         };
 
-    return {
-        enter: function () {
-            var ele = dom.query('header');
-            view.add = new AddView(ele);
-            
-            ele = dom.g('content');
-            view.list = new ListView(ele);
+    var action = require('saber-firework').action('main');
 
-            render();
+    action.enter = function () {
+        view.add.render('header');
+        view.list.render('.content');
 
-            Object.keys(rounterConfig).forEach(function (key) {
-                rounter.add(key, rounterConfig[key]);
-            });
-            rounter.index = '/day';
-            rounter.start();
-        }
+        bindEvents();
+
+        Object.keys(rounterConfig).forEach(function (key) {
+            router.add(key, rounterConfig[key]);
+        });
+
+        router.index = '/day';
+        router.start();
     };
+
+    return action;
 });
