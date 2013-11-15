@@ -6,9 +6,14 @@
 define(function (require) {
 
     var dom = require('saber-dom');
-    var View = require('saber-firework/View');
-    var view = new View('add');
-    
+    var BaseView = require('saber-firework/View');
+
+    function View() {
+        BaseView.call(this, 'add');
+    }
+
+    BaseView.subClass(View);
+
     function submit(view) {
         var input = dom.query('input', view.main);
         var value = input.value = input.value.trim();
@@ -45,15 +50,15 @@ define(function (require) {
         );
     }
     
-    view.reset = function () {
+    View.prototype.reset = function () {
         var input = dom.query('input', this.main);
         input.value = '';
     };
 
-    view.render = function (main) {
-        View.prototype.render.call(this, main);
+    View.prototype.render = function (main) {
+        BaseView.prototype.render.call(this, main);
         bindEvents(this);
     };
     
-    return view;
+    return View;
 });

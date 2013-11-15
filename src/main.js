@@ -4,14 +4,17 @@
  */
 
 define(function (require) {
-    var curAction;
 
     var router = require('saber-router');
     var model = require('./model/record');
+    var AddView = require('./view/Add');
+    var ListView = require('./view/List');
+
     var view = {
-            add: require('./view/add'),
-            list: require('./view/list'),
+            add: new AddView(),
+            list: new ListView()
         };
+    var curAction;
 
     function bindEvents() {
         view.add.on('submit', function (e) {
@@ -27,7 +30,8 @@ define(function (require) {
     function loadAction(url, file) {
         return function (query) {
             var page = view.list.load(url);
-            window.require([file], function (action) {
+            window.require([file], function (Action) {
+                var action = new Action();
                 action.enter(page.main, query).then(function () {
                     page.enter();
                 });
@@ -37,8 +41,8 @@ define(function (require) {
     }
 
     var rounterConfig = {
-            '/day': loadAction('/day', 'day'),
-            '/month': loadAction('/month', 'month')
+            '/day': loadAction('/day', 'Day'),
+            '/month': loadAction('/month', 'Month')
         };
 
     var action = require('saber-firework').action('main');
